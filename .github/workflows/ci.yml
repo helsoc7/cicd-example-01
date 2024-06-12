@@ -32,4 +32,4 @@ jobs:
     - name: Teste
       run: |
         cd frontend
-        npm test -- --detectOpenHandles --forceExit    
+        npm test    
