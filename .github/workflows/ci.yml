@@ -16,4 +16,4 @@ jobs:
     - name: Teste
       run: |
         cd backend
-        npm test
+        npm test -- --detectOpenHandles --forceExit
