@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import './App.css';
+
 function App() {
  const [backendMessage, setBackendMessage] = useState('');
 useEffect(() => {

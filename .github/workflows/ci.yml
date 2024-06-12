@@ -1,7 +1,7 @@
 name: CI/CD Pipeline
 on: [push]
 jobs:
-  test:
+  backend-test:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
@@ -17,3 +17,19 @@ jobs:
       run: |
         cd backend
         npm test -- --detectOpenHandles --forceExit
+  frontend-test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Installiere NodeJS
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+    - name: Installiere Abhängigkeiten
+      run: |
+        cd frontend
+        npm install
+    - name: Teste
+      run: |
+        cd frontend
+        npm test -- --detectOpenHandles --forceExit    
