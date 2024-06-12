@@ -11,9 +11,9 @@ jobs:
         node-version: '20'
     - name: Installiere Abhängigkeiten
       run: |
-      cd backend
-      npm install
+        cd backend
+        npm install
     - name: Teste
       run: |
-      cd backend
-      npm test
+        cd backend
+        npm test
