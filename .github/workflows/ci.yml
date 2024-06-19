@@ -79,11 +79,4 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Setze SSH Verbindung
-      uses: appleboy/ssh-action@v0.1.2
-      with:
-        host: ${{ secrets.HOST }}
-        username: ${{ secrets.USERNAME }}
-        key: ${{ secrets.SSH_KEY }}
-        script: |
-          docker pull helenhaveloh/backend:1.0.0
-          docker run -d --name backend-container -p 4000:4000 mein-backend:${{ github.sha }}
+      run: ssh -o StrictHostKeyChecking=no -i ${{ secrets.SSH_PRIVATE_KEY }} ${{ secrets.USERNAME }}@${{ secrets.HOST }} "docker pull ${{ secrets.DOCKER_USERNAME }}/backend:1.0.0"
