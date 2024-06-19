@@ -64,17 +64,16 @@ jobs:
       run: |
         cd frontend
         npm run build
-    - name: Deploye das Frontend auf S3 Bucket
-      uses: jakejarvis/s3-sync-action@master
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v4
       with:
-        args: --acl public-read --follow-symlinks --delete
-      env:
-        AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
-        AWS_REGION: ${{ secrets.AWS_REGION }}
-        SOURCE_DIR: "./build"
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
+        aws-region: ${{ secrets.AWS_REGION }}
+    - name: Deploy Frontend to S3
+      run: aws s3 sync ./frontend/build s3://${{ secrets.AWS_S3_BUCKET }} --acl public-read --delete
+      
   deploy-backend:
     runs-on: ubuntu-latest
     steps:
