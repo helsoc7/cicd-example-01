@@ -85,5 +85,5 @@ jobs:
         mkdir -p ~/.ssh
         echo "$SSH_KEY" > ~/.ssh/id_rsa
         chmod 600 ~/.ssh/id_rsa
-        ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ${{ secrets.USERNAME }}@${{ secrets.HOST }} "docker pull ${{ secrets.DOCKER_USERNAME }}/backend:1.0.0"
+        ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ${{ secrets.USERNAME }}@${{ secrets.HOST }} "sudo docker pull ${{ secrets.DOCKER_USERNAME }}/backend:1.0.0"
 
