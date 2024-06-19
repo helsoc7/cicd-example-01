@@ -79,4 +79,4 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Setze SSH Verbindung
-      run: ssh -o StrictHostKeyChecking=no -i ${{ secrets.SSH_PRIVATE_KEY }} ${{ secrets.USERNAME }}@${{ secrets.HOST }} "docker pull ${{ secrets.DOCKER_USERNAME }}/backend:1.0.0"
+      run: ssh -o StrictHostKeyChecking=no -i ${{ secrets.SSH_KEY }} ${{ secrets.USERNAME }}@${{ secrets.HOST }} "docker pull ${{ secrets.DOCKER_USERNAME }}/backend:1.0.0"
