@@ -65,15 +65,14 @@ jobs:
         cd frontend
         npm run build
     - name: Deploye das Frontend auf S3 Bucket
-      uses: jakejarvis/s3-sync-action@master
+      uses: shallwefootball/s3-upload-action@master
       with:
-        args: --acl public-read --follow-symlinks --delete
-      env:
-        AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        AWS_REGION: 'eu-central-1'   # optional: defaults to us-east-1
-        SOURCE_DIR: './frontend/build' 
+          aws_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
+          aws_session_token: ${{ secrets.AWS_SESSION_TOKEN }}
+          aws_bucket: ${{ secrets.AWS_BUCKET }}
+          aws_region: ${{ secrets.AWS_REGION }}
+          source_dir: './build'
   deploy-backend:
     runs-on: ubuntu-latest
     steps:
